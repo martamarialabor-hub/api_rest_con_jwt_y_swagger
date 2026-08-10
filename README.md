@@ -170,3 +170,63 @@ colegio_san_marcos/
 ```bash
 npm run dev    # Inicia el servidor con recarga automática (node --watch)
 ```
+---
+
+# 🚀 Despliegue y Producción - DevOps
+
+## Descripción
+
+Esta versión de la API REST fue preparada para un entorno de producción aplicando prácticas básicas de DevOps, incluyendo variables de entorno, monitoreo, PostgreSQL, respaldos y automatización mediante CI/CD.
+
+## Variables de entorno
+
+Las configuraciones sensibles se manejan mediante variables de entorno.
+
+El proyecto incluye un archivo `.env.example` como referencia.
+
+Variables utilizadas:
+
+- `PORT`: puerto de ejecución de la API.
+- `API_KEY`: clave utilizada para proteger determinadas operaciones de la API.
+- `DATABASE_URL`: cadena de conexión a PostgreSQL.
+- `JWT_SECRET`: clave utilizada para la generación y validación de tokens JWT.
+- `NODE_ENV`: entorno de ejecución de la aplicación.
+
+El archivo `.env` no se incluye en el repositorio público y se encuentra excluido mediante `.gitignore`.
+
+## Base de datos
+
+La aplicación utiliza PostgreSQL y Prisma ORM.
+
+Los modelos principales son:
+
+- `Alumno`
+- `Usuario`
+- `Rol`
+
+Las migraciones de Prisma se encuentran en:
+
+`prisma/migrations`
+
+La migración inicial permite crear la estructura necesaria de la base de datos.
+
+## Monitoreo
+
+La aplicación cuenta con un endpoint de comprobación de estado:
+
+`GET /health`
+
+Este endpoint permite verificar:
+
+- Estado de la API.
+- Estado de conexión con PostgreSQL.
+- Fecha y hora de la comprobación.
+
+Ejemplo de respuesta:
+
+```json
+{
+  "status": "ok",
+  "database": "connected",
+  "timestamp": "2026-08-10T00:00:00.000Z"
+}
